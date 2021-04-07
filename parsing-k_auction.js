@@ -1,32 +1,22 @@
 var q = [];
-var ls = document.querySelectorAll('.renewalRow > li')
+var ls = document.querySelectorAll('.list-pd')
 ls.forEach((item, index) => {
+    const mainInfo = item.querySelector('.card.artwork');
+    const number = mainInfo?.querySelector('.lot')?.innerText || '';
+    const artist = mainInfo?.querySelector('.card-title')?.innerText || '';
+    const title = mainInfo?.querySelector('.card-subtitle')?.innerText || '';
+    const description = mainInfo?.querySelector('.description')?.innerText || '';
+    const material= description.split('\n')[0];
+    const size = description.split('\n')[1];
+    const estimate = mainInfo?.querySelector('.list-inline-item.font-numbers')?.innerText.replace('\n',' ') || '';
 
-const mainInfo = item.querySelector('.information .main');
-const number = mainInfo?.querySelector('.lotNum')?.innerText || '';
-const artist = mainInfo?.querySelector('.artist')?.innerText.split('(')[0] || '';
-const subject = mainInfo?.querySelector('.subject')?.innerText || '';
-const subjectKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(subject) ? subject : '';
-const subjectEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(subject) ? subject : '';
-console.log(mainInfo, number, artist, subject)
-
-const subInfo = item.querySelector('.information .sub')
-const year = subInfo?.querySelector('.year')?.innerText || '';
-const material = subInfo?.querySelector('p:nth-child(2)')?.innerText || '';
-const size = subInfo?.querySelector('p:nth-child(3)')?.innerText || '';
-console.log(subInfo, year, material, size)
-
-q.push({
-number,
-artist,
-year,
-subjectKr,
-subjectEn,
-size,
-material
+    q.push({
+    number,
+    artist,
+    title,
+    material,
+    size,
+    estimate
 })
-
-
 })
-
 copy(q)
