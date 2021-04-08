@@ -13,8 +13,6 @@ const desc = item.querySelector('.workmaterial')
 const material = desc.querySelector('[ng-bind="lot.MATE_NM_EN"]')?.innerText;
 
 const sizeEdition = item.querySelector('.edition_txt_p')?.innerText || '';
-const size = sizeEdition.includes('ed.') ? sizeEdition.split(" ed.")[0] : sizeEdition ;
-const edition = sizeEdition.includes('ed.') ? 'ed.'+sizeEdition.split("ed.")[1] : "";
 
 const year = desc?.querySelector('.ng-binding')?.innerText || '';
 const estimate = item?.querySelector('li.es_price_right')?.innerText.replace('\n', ' ') || '';
@@ -27,8 +25,7 @@ titleKr,
 titleEn,
 year,
 material,
-size,
-edition,
+sizeEdition,
 estimate
 })
 })
