@@ -5,6 +5,8 @@ ls.forEach((item, index) => {
     const number = mainInfo?.querySelector('.lot')?.innerText.split('LOT ')[1] || '';
     const artist = mainInfo?.querySelector('.card-title')?.innerText || '';
     const title = mainInfo?.querySelector('.card-subtitle')?.innerText || '';
+    const titleKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
+    const titleEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
     const description = mainInfo?.querySelector('.description')?.innerText || '';
     const yearMaterial= description.split('\n')[0];
     const year = yearMaterial.replace(/[^0-9]/g,"").trim()
@@ -15,7 +17,8 @@ ls.forEach((item, index) => {
     q.push({
     number,
     artist,
-    title,
+    titleKr,
+    titleEn,
     year,
     material,
     sizeEdition,
