@@ -1,34 +1,35 @@
 var q = [];
 var ls = document.querySelectorAll("#auctionList > li")
 ls.forEach((item) => {
-const author = item.querySelector('.auction_list_author');
+const number = item.querySelector('.auction_lotnum').innerText;
+const artist = item.querySelector('[ng-bind="lot.ARTIST_NAME_JSON[locale]').innerText;
+const birth = item.querySelector('.auction_workartist > .txt_pale ').innerText;
+const title = item.querySelector('.auction_worktitle').innerText;
 
+const titleKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
+const titleEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
 
-const number = author.querySelector('.auction_lotnum').innerText;
-const artist = author.querySelector('.auction_workartist').innerText;
-const birth = author.querySelector('.name > span').innerText;
-const subject = author.querySelector('.auction_worktitle .tit').innerText;
+const desc = item.querySelector('.workmaterial')
+const material = desc.querySelector('[ng-bind="lot.MATE_NM_EN"]')?.innerText;
 
-const subjectKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(subject) ? subject : '';
-const subjectEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(subject) ? subject : '';
+const sizeEdition = item.querySelector('.edition_txt_p')?.innerText || '';
+const size = sizeEdition.includes('ed.') ? sizeEdition.split(" ed.")[0] : sizeEdition ;
+const edition = sizeEdition.includes('ed.') ? 'ed.'+sizeEdition.split("ed.")[1] : "";
 
-const explain = author.querySelector('.auction_list_explain')
-const material = explain.querySelector('[ng-bind="lot.MATE_NM_EN"]').innerText;
-const size = explain.querySelectorAll('[ng-bind="size | size_text"]');
-let sizeList = [];
-size.forEach((t) => sizeList.push(t.innerText));
-const edition = explain?.querySelector('[ng-bind="lot.edition"]')?.innerText || '';
-const year = explain?.querySelector('[ng-if="lot.MAKE_YEAR_JSON[locale]"]')?.innerText || '';
+const year = desc?.querySelector('.ng-binding')?.innerText || '';
+const estimate = item?.querySelector('li.es_price_right')?.innerText.replace('\n', ' ') || '';
 
 q.push({
 number,
 artist,
+birth,
+titleKr,
+titleEn,
 year,
-subjectKr,
-subjectEn,
-sizeList,
 material,
+size,
 edition,
+estimate
 })
 })
 copy(q)
