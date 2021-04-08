@@ -1,5 +1,5 @@
-var q = [];
-var ls = document.querySelectorAll("#auctionList > li")
+let q = [];
+let ls = document.querySelectorAll("#auctionList > li")
 ls.forEach((item) => {
 const number = item.querySelector('.auction_lotnum').innerText;
 const artist = item.querySelector('[ng-bind="lot.ARTIST_NAME_JSON[locale]').innerText;
