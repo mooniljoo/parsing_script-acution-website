@@ -1,5 +1,5 @@
-var q = [];
-var ls = document.querySelectorAll('.list-pd')
+let q = [];
+let ls = document.querySelectorAll('.list-pd')
 ls.forEach((item, index) => {
     const mainInfo = item.querySelector('.card.artwork');
     const number = mainInfo?.querySelector('.lot')?.innerText || '';
