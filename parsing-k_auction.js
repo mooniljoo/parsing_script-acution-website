@@ -1,28 +1,42 @@
 let q = [];
-let ls = document.querySelectorAll('.list-pd')
-ls.forEach((item, index) => {
-    const mainInfo = item.querySelector('.card.artwork');
+let ls = document.querySelectorAll('.list-pd');
+let source = document.querySelector("title")?.innerText;
+let auction_title = document.querySelector('.subtop-desc > h1')?.innerText;
+ls.forEach((item) => {
+
+    const mainInfo = item?.querySelector('.card.artwork');
     const number = mainInfo?.querySelector('.lot')?.innerText.split('LOT ')[1] || '';
     const artist = mainInfo?.querySelector('.card-title')?.innerText || '';
     const title = mainInfo?.querySelector('.card-subtitle')?.innerText || '';
+    const description = mainInfo?.querySelector('.description')?.innerText || '';
+    const yearMaterial= description?.split('\n')[0];
+    const year = yearMaterial?.replace(/[^0-9]/g,"").trim()
+    const material = yearMaterial?.replace(/[0-9]/g,"").trim()
+    const sizeEdition = description?.split('\n')[1];
+    const estimate = mainInfo?.querySelector('.list-inline-item.font-numbers')?.innerText.replace('\n',' ') || '';
+    
+    const artistKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(artist) ? artist : '';
+    const artistEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(artist) ? artist : '';
+
     const titleKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
     const titleEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
-    const description = mainInfo?.querySelector('.description')?.innerText || '';
-    const yearMaterial= description.split('\n')[0];
-    const year = yearMaterial.replace(/[^0-9]/g,"").trim()
-    const material = yearMaterial.replace(/[0-9]/g,"").trim()
-    const sizeEdition = description.split('\n')[1];
-    const estimate = mainInfo?.querySelector('.list-inline-item.font-numbers')?.innerText.replace('\n',' ') || '';
+
+    const materialKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(material) ? material : '';
+    const materialEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(material) ? material : '';
 
     q.push({
     number,
-    artist,
+    artistKr,
+    artistEn,
     titleKr,
     titleEn,
     year,
-    material,
     sizeEdition,
-    estimate
+    materialKr,
+    materialEn,
+    estimate,
+    source,
+    auction_title,
 })
 })
 copy(q)
