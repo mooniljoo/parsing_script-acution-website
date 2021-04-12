@@ -1,35 +1,27 @@
 var q = [];
-var ls = document.querySelectorAll("#auctionList > li")
+var ls = document.querySelectorAll(".auction-table > tbody > tr")
 ls.forEach((item) => {
-const author = item.querySelector('.auction_list_author');
 
 
-const number = author.querySelector('.auction_lotnum').innerText;
-const artist = author.querySelector('.auction_workartist').innerText;
-const birth = author.querySelector('.name > span').innerText;
-const subject = author.querySelector('.auction_worktitle .tit').innerText;
+const number = item.querySelectorAll('td')[0].innerText;
+const artist = item.querySelectorAll('td')[2].querySelectorAll('p')[0].innerText;
+const birth = item.querySelectorAll('td')[2].querySelectorAll('p')[2].innerText;
+const title = item.querySelectorAll('td')[3].querySelectorAll('p')[0].innerText;
+const size = item.querySelectorAll('td')[3].querySelectorAll('p')[1].innerText;
+const material = item.querySelectorAll('td')[3].querySelectorAll('p')[2].innerText;
+const year = item.querySelectorAll('td')[3].querySelectorAll('p')[3].innerText;
 
-const subjectKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(subject) ? subject : '';
-const subjectEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(subject) ? subject : '';
-
-const explain = author.querySelector('.auction_list_explain')
-const material = explain.querySelector('[ng-bind="lot.MATE_NM_EN"]').innerText;
-const size = explain.querySelectorAll('[ng-bind="size | size_text"]');
-let sizeList = [];
-size.forEach((t) => sizeList.push(t.innerText));
-console.log(sizeList)
-const edition = explain.querySelectorAll('[ng-bind="lot.edition"]');
-const year = explain?.querySelector('[ng-if="lot.MAKE_YEAR_JSON[locale]"]')?.innerText || '';
+const titleKr = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
+const titleEn = !/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(title) ? title : '';
 
 q.push({
 number,
 artist,
 year,
-subjectKr,
-subjectEn,
-sizeList,
+titleKr,
+titleEn,
+size,
 material,
-edition,
 })
 })
 copy(q)
