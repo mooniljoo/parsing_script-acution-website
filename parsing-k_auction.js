@@ -1,5 +1,7 @@
 let q = [];
 let ls = document.querySelectorAll(".list-pd");
+let source = document.querySelector("title")?.innerText;
+let auction_title = document.querySelector('.subtop-desc > h1')?.innerText;
 ls.forEach((item, index) => {
   const mainInfo = item.querySelector(".card.artwork");
   const number =
